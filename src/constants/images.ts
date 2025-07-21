@@ -1,45 +1,54 @@
 /**
- * 🖼️ Centralized Image Registry - All Pressure Washing Project Images
- * Organized by category with semantic naming and metadata
+ * 🖼️ Centralized Image Registry - Uncle Bob's Clean Architecture
+ * Only real, validated image paths allowed
  */
 
-// Uploaded project images - organized by transformation type
+import { WORKING_IMAGES } from './realImageRegistry';
+
+// 🎯 Real Image Paths (No Fake Placeholders Allowed)
 const UPLOADED_IMAGE_PATHS = {
   DRIVEWAYS: {
-    CONCRETE_TRANSFORMATION: "/lovable-uploads/6d0a98e8-4548-43ed-b9ac-28c13e170f94.png",
-    DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/e83c3da2-3c44-4100-9896-a499899357a6.png",
+    CONCRETE_TRANSFORMATION: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    // Note: Using the same real image for multiple categories until more real paths are provided
+    DRIVEWAY_BEFORE_AFTER: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
   },
   HOUSES: {
-    VINYL_SIDING_CLEANING: "/lovable-uploads/b0a8c9f5-7d4e-4c2a-8b1f-3a5e7d9c2b8f.png",
-    EXTERIOR_HOUSE_WASH: "/lovable-uploads/f2e1d8c7-9a6b-4e3f-8c5d-2a7e9f1c4b6d.png",
-    BRICK_HOUSE_RESTORATION: "/lovable-uploads/8e7d6c5b-4a3f-9e2d-1c8b-7a5f9e3d2c1b.png",
+    // Temporarily using the working image until real paths are provided
+    VINYL_SIDING_CLEANING: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    EXTERIOR_HOUSE_WASH: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    BRICK_HOUSE_RESTORATION: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
   },
   FENCING: {
-    WOODEN_FENCE_RENEWAL: "/lovable-uploads/3c2b1a9f-8e7d-6c5b-4a3f-2e1d9c8b7a6f.png",
-    VINYL_FENCE_CLEANING: "/lovable-uploads/9f8e7d6c-5b4a-3f2e-1d9c-8b7a6f5e4d3c.png",
+    // Temporarily using the working image until real paths are provided
+    WOODEN_FENCE_RENEWAL: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    VINYL_FENCE_CLEANING: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
   },
   BRICK_WORK: {
-    PATIO_RESTORATION: "/lovable-uploads/2b1a9f8e-7d6c-5b4a-3f2e-1d9c8b7a6f5e.png",
-    BRICK_WALKWAY_CLEANING: "/lovable-uploads/7a6f5e4d-3c2b-1a9f-8e7d-6c5b4a3f2e1d.png",
+    // Temporarily using the working image until real paths are provided
+    PATIO_RESTORATION: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    BRICK_WALKWAY_CLEANING: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
   },
 } as const;
 
-// Debug: Log all image paths for verification
-console.log("🖼️ Image Registry Debug - All uploaded image paths:", {
-  driveways: UPLOADED_IMAGE_PATHS.DRIVEWAYS,
-  houses: UPLOADED_IMAGE_PATHS.HOUSES,
-  fencing: UPLOADED_IMAGE_PATHS.FENCING,
-  brickWork: UPLOADED_IMAGE_PATHS.BRICK_WORK,
+// 🔍 Debug: Log real image paths for verification
+console.log("🖼️ REAL IMAGE REGISTRY DEBUG:", {
+  workingImagePath: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+  totalCategories: Object.keys(UPLOADED_IMAGE_PATHS).length,
+  totalImageSlots: Object.values(UPLOADED_IMAGE_PATHS).reduce(
+    (total, category) => total + Object.keys(category).length, 
+    0
+  ),
 });
 
-// Verify paths exist and are accessible
+// 🧪 Validate all paths on load
 Object.entries(UPLOADED_IMAGE_PATHS).forEach(([category, images]) => {
   Object.entries(images).forEach(([imageName, path]) => {
-    console.log(`🔍 Checking ${category}.${imageName}:`, path);
-    // Test if path is accessible (this will show in network tab)
+    console.log(`🔍 CHECKING ${category}.${imageName}:`, path);
+    
+    // Test image accessibility
     const testImg = new Image();
-    testImg.onload = () => console.log(`✅ ${category}.${imageName} path is valid:`, path);
-    testImg.onerror = () => console.error(`❌ ${category}.${imageName} path FAILED:`, path);
+    testImg.onload = () => console.log(`✅ ${category}.${imageName} LOADS SUCCESSFULLY:`, path);
+    testImg.onerror = () => console.error(`❌ ${category}.${imageName} LOAD FAILED:`, path);
     testImg.src = path;
   });
 });
@@ -106,7 +115,7 @@ export const PROJECT_METADATA = {
 } as const;
 
 /**
- * 🎯 Exported Image Registry - Ready for Import
+ * 🎯 Exported Image Registry - Only Real Paths
  */
 export const PRESSURE_WASH_IMAGES = {
   DRIVEWAYS: UPLOADED_IMAGE_PATHS.DRIVEWAYS,
@@ -124,6 +133,9 @@ export const IMAGE_REGISTRY_STATS = {
     (total, category) => total + Object.keys(category).length, 
     0
   ),
+  UNIQUE_PATHS: new Set(
+    Object.values(PRESSURE_WASH_IMAGES).flatMap(category => Object.values(category))
+  ).size,
 } as const;
 
-console.log("🖼️ Image registry loaded:", IMAGE_REGISTRY_STATS);
+console.log("🎯 FINAL IMAGE REGISTRY STATS:", IMAGE_REGISTRY_STATS);

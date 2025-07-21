@@ -11,6 +11,12 @@ const GallerySection = () => {
   const { loadState, handleImageLoad, handleImageError, resetLoadState } = useImageLoader();
 
   console.log("🎯 Gallery initialized with", GALLERY_CONFIG.TOTAL_IMAGES, "images across", GALLERY_CONFIG.CATEGORIES.length, "categories");
+  console.log("📋 All gallery images:", GALLERY_IMAGES.map(img => ({
+    id: img.id,
+    title: img.title,
+    imagePath: img.image,
+    hasBeforeAfter: !!(img.before && img.after)
+  })));
 
   const navigateToSlide = (slideIndex: number) => {
     console.log("🔄 Navigating to slide:", slideIndex, "- Project:", GALLERY_IMAGES[slideIndex].title);
@@ -35,18 +41,24 @@ const GallerySection = () => {
     title: currentImage.title,
     category: currentImage.category,
     projectType: currentImage.projectType,
+    imagePath: currentImage.image,
     hasImage: !!currentImage.image,
     hasSplit: !!(currentImage.before && currentImage.after),
   });
 
   const onImageLoadSuccess = () => {
-    console.log("✅ Successfully loaded:", currentImage.title);
+    console.log("✅ Successfully loaded:", currentImage.title, "from path:", currentImage.image);
     handleImageLoad(currentImage.image || currentImage.title);
   };
 
-  const onImageLoadError = () => {
-    console.error("❌ Failed to load project image:", currentImage.title);
-    handleImageError(currentImage.image || currentImage.title, 'Network or file access error');
+  const onImageLoadError = (event: any) => {
+    console.error("❌ Failed to load project image:", {
+      title: currentImage.title,
+      imagePath: currentImage.image,
+      errorEvent: event,
+      errorTarget: event?.target?.src
+    });
+    handleImageError(currentImage.image || currentImage.title, `Failed to load: ${currentImage.image}`);
   };
 
   return (
@@ -71,21 +83,27 @@ const GallerySection = () => {
                 <div className="relative w-full h-full">
                   {loadState.isLoading && (
                     <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-                      <p className="text-muted-foreground">🔄 Loading {currentImage.category} project...</p>
+                      <div className="text-center">
+                        <p className="text-muted-foreground mb-2">🔄 Loading {currentImage.category} project...</p>
+                        <p className="text-xs text-muted-foreground">Path: {currentImage.image}</p>
+                      </div>
                     </div>
                   )}
                   {loadState.hasError ? (
                     <div className="absolute inset-0 bg-muted flex items-center justify-center">
-                      <div className="text-center">
-                        <p className="text-muted-foreground mb-2">❌ Failed to load project image</p>
+                      <div className="text-center p-6">
+                        <p className="text-destructive mb-2 font-semibold">❌ Image Load Failed</p>
                         <p className="text-sm text-muted-foreground mb-2">Project: {currentImage.title}</p>
+                        <p className="text-xs text-muted-foreground mb-2 break-all">Path: {currentImage.image}</p>
                         <p className="text-xs text-muted-foreground mb-4">Error: {loadState.errorMessage}</p>
-                        {/* Fallback to a working image */}
-                        <img 
-                          src={heroImage}
-                          alt="Fallback pressure washing example"
-                          className="w-full h-full object-cover mt-4"
-                        />
+                        <div className="border-t pt-4">
+                          <p className="text-xs text-muted-foreground mb-2">Fallback Image:</p>
+                          <img 
+                            src={heroImage}
+                            alt="Fallback pressure washing example"
+                            className="w-full h-32 object-cover rounded"
+                          />
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -107,6 +125,8 @@ const GallerySection = () => {
                       src={currentImage.before}
                       alt="Before pressure washing"
                       className="w-full h-full object-cover"
+                      onLoad={() => console.log("✅ Before image loaded:", currentImage.before)}
+                      onError={(e) => console.error("❌ Before image failed:", currentImage.before, e)}
                     />
                     <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-md font-semibold text-sm">
                       BEFORE
@@ -119,6 +139,8 @@ const GallerySection = () => {
                       src={currentImage.after}
                       alt="After pressure washing"
                       className="w-full h-full object-cover"
+                      onLoad={() => console.log("✅ After image loaded:", currentImage.after)}
+                      onError={(e) => console.error("❌ After image failed:", currentImage.after, e)}
                     />
                     <div className="absolute top-4 right-4 bg-success-green text-white px-3 py-1 rounded-md font-semibold text-sm">
                       AFTER
@@ -141,6 +163,11 @@ const GallerySection = () => {
                   <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs">
                     {currentImage.projectType}
                   </span>
+                  {currentImage.image && (
+                    <span className="bg-blue-500 text-white px-2 py-1 rounded text-xs">
+                      Real Upload
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-white text-xl font-semibold mb-2">
                   {currentImage.title}
@@ -175,12 +202,12 @@ const GallerySection = () => {
               <button
                 key={image.id}
                 onClick={() => navigateToSlide(index)}
-                title={`${image.title} - ${image.category}`}
+                title={`${image.title} - ${image.category} ${image.image ? '(Real Upload)' : '(Demo)'}`}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentSlide 
                     ? 'bg-primary scale-125' 
                     : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                }`}
+                } ${image.image ? 'ring-2 ring-blue-300' : ''}`}
               />
             ))}
           </div>

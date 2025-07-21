@@ -1,4 +1,3 @@
-
 /**
  * 🖼️ Centralized Image Registry - All Pressure Washing Project Images
  * Organized by category with semantic naming and metadata
@@ -24,6 +23,26 @@ const UPLOADED_IMAGE_PATHS = {
     BRICK_WALKWAY_CLEANING: "/lovable-uploads/7a6f5e4d-3c2b-1a9f-8e7d-6c5b4a3f2e1d.png",
   },
 } as const;
+
+// Debug: Log all image paths for verification
+console.log("🖼️ Image Registry Debug - All uploaded image paths:", {
+  driveways: UPLOADED_IMAGE_PATHS.DRIVEWAYS,
+  houses: UPLOADED_IMAGE_PATHS.HOUSES,
+  fencing: UPLOADED_IMAGE_PATHS.FENCING,
+  brickWork: UPLOADED_IMAGE_PATHS.BRICK_WORK,
+});
+
+// Verify paths exist and are accessible
+Object.entries(UPLOADED_IMAGE_PATHS).forEach(([category, images]) => {
+  Object.entries(images).forEach(([imageName, path]) => {
+    console.log(`🔍 Checking ${category}.${imageName}:`, path);
+    // Test if path is accessible (this will show in network tab)
+    const testImg = new Image();
+    testImg.onload = () => console.log(`✅ ${category}.${imageName} path is valid:`, path);
+    testImg.onerror = () => console.error(`❌ ${category}.${imageName} path FAILED:`, path);
+    testImg.src = path;
+  });
+});
 
 /**
  * 🏗️ Image Categories Configuration

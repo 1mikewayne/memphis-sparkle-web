@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,10 +9,9 @@ import heroImage from "@/assets/hero-before-after.jpg";
 const galleryImages = [
   {
     id: 1,
-    before: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop", // Dirty driveway placeholder
-    after: "/lovable-uploads/c4ac5e17-42b5-4ce9-a0b6-ee80dd46e90a.png", // Your uploaded before/after image
+    image: "/lovable-uploads/0cde2a90-3462-46b7-9533-a2fa415c6386.png",
     title: "Residential Driveway Transformation",
-    description: "Complete driveway and walkway restoration"
+    description: "Complete driveway and walkway restoration - Before & After"
   },
   {
     id: 2,
@@ -40,6 +40,8 @@ const GallerySection = () => {
     setCurrentSlide((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 
+  const currentImage = galleryImages[currentSlide];
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="container">
@@ -56,42 +58,56 @@ const GallerySection = () => {
           {/* Main Carousel */}
           <div className="relative rounded-lg overflow-hidden shadow-[var(--shadow-hero)]">
             <div className="relative h-[400px] md:h-[500px]">
-              <div className="absolute inset-0 grid grid-cols-2">
-                {/* Before */}
-                <div className="relative">
+              {currentImage.image ? (
+                // Single before/after comparison image
+                <div className="relative w-full h-full">
                   <img 
-                    src={galleryImages[currentSlide].before}
-                    alt="Before pressure washing"
+                    src={currentImage.image}
+                    alt={currentImage.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-md font-semibold text-sm">
-                    BEFORE
+                </div>
+              ) : (
+                // Split before/after layout for other images
+                <div className="absolute inset-0 grid grid-cols-2">
+                  {/* Before */}
+                  <div className="relative">
+                    <img 
+                      src={currentImage.before}
+                      alt="Before pressure washing"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-md font-semibold text-sm">
+                      BEFORE
+                    </div>
+                  </div>
+                  
+                  {/* After */}
+                  <div className="relative">
+                    <img 
+                      src={currentImage.after}
+                      alt="After pressure washing"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-4 right-4 bg-success-green text-white px-3 py-1 rounded-md font-semibold text-sm">
+                      AFTER
+                    </div>
                   </div>
                 </div>
-                
-                {/* After */}
-                <div className="relative">
-                  <img 
-                    src={galleryImages[currentSlide].after}
-                    alt="After pressure washing"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 right-4 bg-success-green text-white px-3 py-1 rounded-md font-semibold text-sm">
-                    AFTER
-                  </div>
-                </div>
-              </div>
+              )}
 
-              {/* Center Divider */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-white shadow-lg"></div>
+              {/* Center Divider - only show for split layout */}
+              {!currentImage.image && (
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-white shadow-lg"></div>
+              )}
               
               {/* Project Info Overlay */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                 <h3 className="text-white text-xl font-semibold mb-2">
-                  {galleryImages[currentSlide].title}
+                  {currentImage.title}
                 </h3>
                 <p className="text-white/90">
-                  {galleryImages[currentSlide].description}
+                  {currentImage.description}
                 </p>
               </div>
             </div>

@@ -8,8 +8,8 @@ import heroImage from "@/assets/hero-before-after.jpg";
 const galleryImages = [
   {
     id: 1,
-    before: heroImage,
-    after: cleanHouseImage,
+    before: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop", // Dirty driveway placeholder
+    after: "/lovable-uploads/c4ac5e17-42b5-4ce9-a0b6-ee80dd46e90a.png", // Your uploaded before/after image
     title: "Residential Driveway Transformation",
     description: "Complete driveway and walkway restoration"
   },

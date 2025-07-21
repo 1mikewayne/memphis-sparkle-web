@@ -1,66 +1,49 @@
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import cleanHouseImage from "@/assets/clean-house.jpg";
-import serviceActionImage from "@/assets/service-action.jpg";
+import { useImageLoader } from "@/hooks/useImageLoader";
+import { GALLERY_IMAGES, GALLERY_CONFIG, type GalleryImageItem } from "@/constants/galleryImages";
 import heroImage from "@/assets/hero-before-after.jpg";
 
-const galleryImages = [
-  {
-    id: 1,
-    image: "/lovable-uploads/0cde2a90-3462-46b7-9533-a2fa415c6386.png",
-    title: "Residential Driveway Transformation",
-    description: "Complete driveway and walkway restoration - Before & After"
-  },
-  {
-    id: 2,
-    before: serviceActionImage,
-    after: cleanHouseImage,
-    title: "House Washing Project",
-    description: "Vinyl siding and exterior cleaning"
-  },
-  {
-    id: 3,
-    before: heroImage,
-    after: serviceActionImage,
-    title: "Commercial Property",
-    description: "Large-scale commercial cleaning project"
-  }
-];
-
 const GallerySection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [imageError, setImageError] = useState(false);
-  const [imageLoading, setImageLoading] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(GALLERY_CONFIG.DEFAULT_SLIDE_INDEX);
+  const { loadState, handleImageLoad, handleImageError, resetLoadState } = useImageLoader();
+
+  console.log("🎯 Gallery initialized with", GALLERY_CONFIG.TOTAL_IMAGES, "images");
+
+  const navigateToSlide = (slideIndex: number) => {
+    console.log("🔄 Navigating to slide:", slideIndex);
+    setCurrentSlide(slideIndex);
+    resetLoadState();
+  };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
-    setImageError(false);
-    setImageLoading(true);
+    const nextIndex = (currentSlide + 1) % GALLERY_CONFIG.TOTAL_IMAGES;
+    navigateToSlide(nextIndex);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
-    setImageError(false);
-    setImageLoading(true);
+    const prevIndex = (currentSlide - 1 + GALLERY_CONFIG.TOTAL_IMAGES) % GALLERY_CONFIG.TOTAL_IMAGES;
+    navigateToSlide(prevIndex);
   };
 
-  const currentImage = galleryImages[currentSlide];
+  const currentImage: GalleryImageItem = GALLERY_IMAGES[currentSlide];
 
-  const handleImageLoad = () => {
-    console.log("Image loaded successfully:", currentImage.image);
-    setImageLoading(false);
+  console.log("📸 Current image data:", {
+    id: currentImage.id,
+    title: currentImage.title,
+    hasImage: !!currentImage.image,
+    hasSplit: !!(currentImage.before && currentImage.after),
+    imagePath: currentImage.image,
+  });
+
+  const onImageLoadSuccess = () => {
+    handleImageLoad(currentImage.image || 'unknown');
   };
 
-  const handleImageError = () => {
-    console.error("Failed to load image:", currentImage.image);
-    setImageError(true);
-    setImageLoading(false);
+  const onImageLoadError = () => {
+    handleImageError(currentImage.image || 'unknown', 'Network or file access error');
   };
-
-  console.log("Current image data:", currentImage);
-  console.log("Image path being used:", currentImage.image);
 
   return (
     <section className="py-20 bg-muted/30">
@@ -81,20 +64,21 @@ const GallerySection = () => {
               {currentImage.image ? (
                 // Single before/after comparison image
                 <div className="relative w-full h-full">
-                  {imageLoading && (
+                  {loadState.isLoading && (
                     <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-                      <p className="text-muted-foreground">Loading image...</p>
+                      <p className="text-muted-foreground">🔄 Loading image...</p>
                     </div>
                   )}
-                  {imageError ? (
+                  {loadState.hasError ? (
                     <div className="absolute inset-0 bg-muted flex items-center justify-center">
                       <div className="text-center">
-                        <p className="text-muted-foreground mb-2">Failed to load image</p>
+                        <p className="text-muted-foreground mb-2">❌ Failed to load image</p>
                         <p className="text-sm text-muted-foreground">Path: {currentImage.image}</p>
+                        <p className="text-xs text-muted-foreground mb-4">Error: {loadState.errorMessage}</p>
                         {/* Fallback to a working image */}
                         <img 
                           src={heroImage}
-                          alt="Fallback image"
+                          alt="Fallback pressure washing example"
                           className="w-full h-full object-cover mt-4"
                         />
                       </div>
@@ -104,8 +88,8 @@ const GallerySection = () => {
                       src={currentImage.image}
                       alt={currentImage.title}
                       className="w-full h-full object-cover"
-                      onLoad={handleImageLoad}
-                      onError={handleImageError}
+                      onLoad={onImageLoadSuccess}
+                      onError={onImageLoadError}
                     />
                   )}
                 </div>
@@ -174,10 +158,10 @@ const GallerySection = () => {
 
           {/* Dots Indicator */}
           <div className="flex justify-center space-x-2 mt-8">
-            {galleryImages.map((_, index) => (
+            {GALLERY_IMAGES.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => navigateToSlide(index)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentSlide 
                     ? 'bg-primary scale-125' 

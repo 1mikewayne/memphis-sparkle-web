@@ -5,7 +5,12 @@ const Header = () => {
   return (
     <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
+          <img 
+            src="/lovable-uploads/55cd3d40-878c-46b7-8499-c69a292f216a.png" 
+            alt="Pressure Wash 901 Logo" 
+            className="h-10 w-auto"
+          />
           <h1 className="text-2xl font-bold text-primary">Pressure Wash 901</h1>
         </div>
         

@@ -31,16 +31,36 @@ const galleryImages = [
 
 const GallerySection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
+    setImageError(false);
+    setImageLoading(true);
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+    setImageError(false);
+    setImageLoading(true);
   };
 
   const currentImage = galleryImages[currentSlide];
+
+  const handleImageLoad = () => {
+    console.log("Image loaded successfully:", currentImage.image);
+    setImageLoading(false);
+  };
+
+  const handleImageError = () => {
+    console.error("Failed to load image:", currentImage.image);
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  console.log("Current image data:", currentImage);
+  console.log("Image path being used:", currentImage.image);
 
   return (
     <section className="py-20 bg-muted/30">
@@ -61,11 +81,33 @@ const GallerySection = () => {
               {currentImage.image ? (
                 // Single before/after comparison image
                 <div className="relative w-full h-full">
-                  <img 
-                    src={currentImage.image}
-                    alt={currentImage.title}
-                    className="w-full h-full object-cover"
-                  />
+                  {imageLoading && (
+                    <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
+                      <p className="text-muted-foreground">Loading image...</p>
+                    </div>
+                  )}
+                  {imageError ? (
+                    <div className="absolute inset-0 bg-muted flex items-center justify-center">
+                      <div className="text-center">
+                        <p className="text-muted-foreground mb-2">Failed to load image</p>
+                        <p className="text-sm text-muted-foreground">Path: {currentImage.image}</p>
+                        {/* Fallback to a working image */}
+                        <img 
+                          src={heroImage}
+                          alt="Fallback image"
+                          className="w-full h-full object-cover mt-4"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <img 
+                      src={currentImage.image}
+                      alt={currentImage.title}
+                      className="w-full h-full object-cover"
+                      onLoad={handleImageLoad}
+                      onError={handleImageError}
+                    />
+                  )}
                 </div>
               ) : (
                 // Split before/after layout for other images

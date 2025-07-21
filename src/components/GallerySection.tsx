@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,10 +10,10 @@ const GallerySection = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(GALLERY_CONFIG.DEFAULT_SLIDE_INDEX);
   const { loadState, handleImageLoad, handleImageError, resetLoadState } = useImageLoader();
 
-  console.log("🎯 Gallery initialized with", GALLERY_CONFIG.TOTAL_IMAGES, "images");
+  console.log("🎯 Gallery initialized with", GALLERY_CONFIG.TOTAL_IMAGES, "images across", GALLERY_CONFIG.CATEGORIES.length, "categories");
 
   const navigateToSlide = (slideIndex: number) => {
-    console.log("🔄 Navigating to slide:", slideIndex);
+    console.log("🔄 Navigating to slide:", slideIndex, "- Project:", GALLERY_IMAGES[slideIndex].title);
     setCurrentSlide(slideIndex);
     resetLoadState();
   };
@@ -29,20 +30,23 @@ const GallerySection = () => {
 
   const currentImage: GalleryImageItem = GALLERY_IMAGES[currentSlide];
 
-  console.log("📸 Current image data:", {
+  console.log("📸 Current project details:", {
     id: currentImage.id,
     title: currentImage.title,
+    category: currentImage.category,
+    projectType: currentImage.projectType,
     hasImage: !!currentImage.image,
     hasSplit: !!(currentImage.before && currentImage.after),
-    imagePath: currentImage.image,
   });
 
   const onImageLoadSuccess = () => {
-    handleImageLoad(currentImage.image || 'unknown');
+    console.log("✅ Successfully loaded:", currentImage.title);
+    handleImageLoad(currentImage.image || currentImage.title);
   };
 
   const onImageLoadError = () => {
-    handleImageError(currentImage.image || 'unknown', 'Network or file access error');
+    console.error("❌ Failed to load project image:", currentImage.title);
+    handleImageError(currentImage.image || currentImage.title, 'Network or file access error');
   };
 
   return (
@@ -53,7 +57,8 @@ const GallerySection = () => {
             See the Dramatic Difference
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Our before and after gallery showcases the transformative power of professional pressure washing.
+            Our before and after gallery showcases the transformative power of professional pressure washing 
+            across {GALLERY_CONFIG.CATEGORIES.length} different project categories.
           </p>
         </div>
 
@@ -66,14 +71,14 @@ const GallerySection = () => {
                 <div className="relative w-full h-full">
                   {loadState.isLoading && (
                     <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-                      <p className="text-muted-foreground">🔄 Loading image...</p>
+                      <p className="text-muted-foreground">🔄 Loading {currentImage.category} project...</p>
                     </div>
                   )}
                   {loadState.hasError ? (
                     <div className="absolute inset-0 bg-muted flex items-center justify-center">
                       <div className="text-center">
-                        <p className="text-muted-foreground mb-2">❌ Failed to load image</p>
-                        <p className="text-sm text-muted-foreground">Path: {currentImage.image}</p>
+                        <p className="text-muted-foreground mb-2">❌ Failed to load project image</p>
+                        <p className="text-sm text-muted-foreground mb-2">Project: {currentImage.title}</p>
                         <p className="text-xs text-muted-foreground mb-4">Error: {loadState.errorMessage}</p>
                         {/* Fallback to a working image */}
                         <img 
@@ -86,7 +91,7 @@ const GallerySection = () => {
                   ) : (
                     <img 
                       src={currentImage.image}
-                      alt={currentImage.title}
+                      alt={`${currentImage.title} - ${currentImage.category}`}
                       className="w-full h-full object-cover"
                       onLoad={onImageLoadSuccess}
                       onError={onImageLoadError}
@@ -127,8 +132,16 @@ const GallerySection = () => {
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1 h-full bg-white shadow-lg"></div>
               )}
               
-              {/* Project Info Overlay */}
+              {/* Enhanced Project Info Overlay with Category */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium">
+                    {currentImage.category}
+                  </span>
+                  <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded text-xs">
+                    {currentImage.projectType}
+                  </span>
+                </div>
                 <h3 className="text-white text-xl font-semibold mb-2">
                   {currentImage.title}
                 </h3>
@@ -156,12 +169,13 @@ const GallerySection = () => {
             <ChevronRight className="h-6 w-6" />
           </Button>
 
-          {/* Dots Indicator */}
+          {/* Enhanced Dots Indicator with Project Info */}
           <div className="flex justify-center space-x-2 mt-8">
-            {GALLERY_IMAGES.map((_, index) => (
+            {GALLERY_IMAGES.map((image, index) => (
               <button
-                key={index}
+                key={image.id}
                 onClick={() => navigateToSlide(index)}
+                title={`${image.title} - ${image.category}`}
                 className={`w-3 h-3 rounded-full transition-all ${
                   index === currentSlide 
                     ? 'bg-primary scale-125' 
@@ -174,7 +188,7 @@ const GallerySection = () => {
 
         <div className="text-center mt-12">
           <p className="text-lg text-muted-foreground mb-6">
-            Ready to see your property transformed?
+            Ready to see your property transformed? We specialize in {GALLERY_CONFIG.CATEGORIES.join(", ").toLowerCase()}.
           </p>
           <Button 
             size="lg" 

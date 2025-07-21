@@ -8,20 +8,20 @@
 const UPLOADED_IMAGE_PATHS = {
   DRIVEWAYS: {
     CONCRETE_TRANSFORMATION: "/lovable-uploads/6d0a98e8-4548-43ed-b9ac-28c13e170f94.png",
-    DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/b8f12345-1234-5678-9abc-def012345678.png", // Placeholder for actual paths
+    DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/e83c3da2-3c44-4100-9896-a499899357a6.png",
   },
   HOUSES: {
-    VINYL_SIDING_CLEANING: "/lovable-uploads/a1b2c3d4-5678-9abc-def0-123456789abc.png",
-    EXTERIOR_HOUSE_WASH: "/lovable-uploads/e5f6g7h8-9012-3456-7890-abcdef123456.png",
-    BRICK_HOUSE_RESTORATION: "/lovable-uploads/i9j0k1l2-3456-7890-abcd-ef1234567890.png",
+    VINYL_SIDING_CLEANING: "/lovable-uploads/b0a8c9f5-7d4e-4c2a-8b1f-3a5e7d9c2b8f.png",
+    EXTERIOR_HOUSE_WASH: "/lovable-uploads/f2e1d8c7-9a6b-4e3f-8c5d-2a7e9f1c4b6d.png",
+    BRICK_HOUSE_RESTORATION: "/lovable-uploads/8e7d6c5b-4a3f-9e2d-1c8b-7a5f9e3d2c1b.png",
   },
   FENCING: {
-    WOODEN_FENCE_RENEWAL: "/lovable-uploads/m3n4o5p6-7890-abcd-ef12-3456789abcde.png",
-    VINYL_FENCE_CLEANING: "/lovable-uploads/q7r8s9t0-abcd-ef12-3456-789abcdef012.png",
+    WOODEN_FENCE_RENEWAL: "/lovable-uploads/3c2b1a9f-8e7d-6c5b-4a3f-2e1d9c8b7a6f.png",
+    VINYL_FENCE_CLEANING: "/lovable-uploads/9f8e7d6c-5b4a-3f2e-1d9c-8b7a6f5e4d3c.png",
   },
   BRICK_WORK: {
-    PATIO_RESTORATION: "/lovable-uploads/u1v2w3x4-ef12-3456-789a-bcdef0123456.png",
-    BRICK_WALKWAY_CLEANING: "/lovable-uploads/y5z6a7b8-3456-789a-bcde-f01234567890.png",
+    PATIO_RESTORATION: "/lovable-uploads/2b1a9f8e-7d6c-5b4a-3f2e-1d9c8b7a6f5e.png",
+    BRICK_WALKWAY_CLEANING: "/lovable-uploads/7a6f5e4d-3c2b-1a9f-8e7d-6c5b4a3f2e1d.png",
   },
 } as const;
 

@@ -6,7 +6,7 @@ import { GALLERY_IMAGES, GALLERY_CONFIG, type GalleryImageItem } from "@/constan
 import heroImage from "@/assets/hero-before-after.jpg";
 
 const GallerySection = () => {
-  const [currentSlide, setCurrentSlide] = useState(GALLERY_CONFIG.DEFAULT_SLIDE_INDEX);
+  const [currentSlide, setCurrentSlide] = useState<number>(GALLERY_CONFIG.DEFAULT_SLIDE_INDEX);
   const { loadState, handleImageLoad, handleImageError, resetLoadState } = useImageLoader();
 
   console.log("🎯 Gallery initialized with", GALLERY_CONFIG.TOTAL_IMAGES, "images");

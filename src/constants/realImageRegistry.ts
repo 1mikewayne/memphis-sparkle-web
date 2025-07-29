@@ -8,8 +8,9 @@ import { validateImagePathFormat, testImageLoad, type ImageValidationResult } fr
 
 // 🏗️ Known Working Images (Based on Previous Upload Session)
 const VERIFIED_REAL_IMAGES = {
-  // Real uploaded image that we know works
+  // Real uploaded images that we know work
   CONCRETE_DRIVEWAY_TRANSFORMATION: "/lovable-uploads/6d0a98e8-4548-43ed-b9ac-28c13e170f94.png",
+  DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/c7ac95af-9b19-43c0-b48e-009256695dcb.png",
   
   // Additional real images (update these with your actual uploaded paths)
   HOUSE_VINYL_CLEANING: "/lovable-uploads/a1b2c3d4-e5f6-7890-abcd-ef1234567890.png", // UPDATE WITH REAL PATH
@@ -27,7 +28,7 @@ const VERIFIED_REAL_IMAGES = {
  */
 export const REAL_IMAGE_STATS = {
   TOTAL_IMAGES: Object.keys(VERIFIED_REAL_IMAGES).length,
-  VERIFIED_COUNT: 1, // Currently only one verified
+  VERIFIED_COUNT: 2, // Currently two verified
   NEEDS_VERIFICATION: Object.keys(VERIFIED_REAL_IMAGES).length - 1,
 } as const;
 
@@ -78,9 +79,10 @@ export const createValidatedImageRegistry = async () => {
   };
 };
 
-// 🎯 Export only the verified image we know works for now
+// 🎯 Export only the verified images we know work
 export const WORKING_IMAGES = {
   CONCRETE_TRANSFORMATION: VERIFIED_REAL_IMAGES.CONCRETE_DRIVEWAY_TRANSFORMATION,
+  DRIVEWAY_BEFORE_AFTER: VERIFIED_REAL_IMAGES.DRIVEWAY_BEFORE_AFTER,
 } as const;
 
 console.log(`🎯 REAL IMAGE REGISTRY LOADED:`, {

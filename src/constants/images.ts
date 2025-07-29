@@ -9,8 +9,8 @@ import { WORKING_IMAGES } from './realImageRegistry';
 const UPLOADED_IMAGE_PATHS = {
   DRIVEWAYS: {
     CONCRETE_TRANSFORMATION: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
-    // Note: Using the same real image for multiple categories until more real paths are provided
-    DRIVEWAY_BEFORE_AFTER: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+    // Real before/after driveway transformation
+    DRIVEWAY_BEFORE_AFTER: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
   },
   HOUSES: {
     // Temporarily using the working image until real paths are provided

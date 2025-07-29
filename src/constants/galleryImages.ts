@@ -27,7 +27,7 @@ export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
   // Primary featured transformation - the uploaded before/after comparison
   {
     id: 1,
-    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.CONCRETE_TRANSFORMATION,
+    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.DRIVEWAY_BEFORE_AFTER,
     title: PROJECT_METADATA.DRIVEWAY_CONCRETE.title,
     description: PROJECT_METADATA.DRIVEWAY_CONCRETE.description,
     category: PROJECT_METADATA.DRIVEWAY_CONCRETE.category,

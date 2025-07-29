@@ -34,22 +34,22 @@ export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
     projectType: PROJECT_METADATA.BACKYARD_TRANSFORMATION.projectType,
   },
 
-  // Driveway transformations
+  // Sidewalk cleaning (moved from driveways)
   {
     id: 2,
-    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.DRIVEWAY_BEFORE_AFTER,
-    title: PROJECT_METADATA.DRIVEWAY_CONCRETE.title,
-    description: PROJECT_METADATA.DRIVEWAY_CONCRETE.description,
-    category: PROJECT_METADATA.DRIVEWAY_CONCRETE.category,
-    projectType: PROJECT_METADATA.DRIVEWAY_CONCRETE.projectType,
+    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.SIDEWALK_1,
+    title: PROJECT_METADATA.SIDEWALK_CLEANING.title,
+    description: PROJECT_METADATA.SIDEWALK_CLEANING.description,
+    category: PROJECT_METADATA.SIDEWALK_CLEANING.category,
+    projectType: PROJECT_METADATA.SIDEWALK_CLEANING.projectType,
   },
 
   {
     id: 3,
-    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.CONCRETE_TRANSFORMATION,
-    title: "Concrete Driveway Restoration",
-    description: "Professional concrete cleaning and restoration removing years of buildup",
-    category: "Driveway Transformations",
+    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.SIDEWALK_2,
+    title: "Sidewalk Surface Restoration",
+    description: "Professional sidewalk cleaning revealing original concrete condition",
+    category: "Sidewalk Cleaning",
     projectType: "Residential",
   },
 

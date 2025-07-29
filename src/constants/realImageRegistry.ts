@@ -6,13 +6,9 @@
 
 import { validateImagePathFormat, testImageLoad, type ImageValidationResult } from './imageValidation';
 
-// 🏗️ All Verified Working Images (Expanded Registry)
+// 🏗️ All Verified Working Images (Real Customer Transformations)
 const VERIFIED_REAL_IMAGES = {
-  // Original verified images
-  CONCRETE_DRIVEWAY_TRANSFORMATION: "/lovable-uploads/6d0a98e8-4548-43ed-b9ac-28c13e170f94.png",
-  DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/c7ac95af-9b19-43c0-b48e-009256695dcb.png",
-  
-  // New uploaded real customer transformations
+  // Real uploaded customer transformations
   BACKYARD_TRANSFORMATION: "/lovable-uploads/backyard1.jpg",
   WALKWAY_CLEANING: "/lovable-uploads/walkway1.jpg",
   GATE_RESTORATION: "/lovable-uploads/gate1.jpg",
@@ -82,11 +78,7 @@ export const createValidatedImageRegistry = async () => {
 
 // 🎯 Export all verified working images organized by category
 export const WORKING_IMAGES = {
-  // Original images
-  CONCRETE_TRANSFORMATION: VERIFIED_REAL_IMAGES.CONCRETE_DRIVEWAY_TRANSFORMATION,
-  DRIVEWAY_BEFORE_AFTER: VERIFIED_REAL_IMAGES.DRIVEWAY_BEFORE_AFTER,
-  
-  // New customer transformations
+  // Real customer transformations
   BACKYARD_TRANSFORMATION: VERIFIED_REAL_IMAGES.BACKYARD_TRANSFORMATION,
   WALKWAY_CLEANING: VERIFIED_REAL_IMAGES.WALKWAY_CLEANING,
   GATE_RESTORATION: VERIFIED_REAL_IMAGES.GATE_RESTORATION,

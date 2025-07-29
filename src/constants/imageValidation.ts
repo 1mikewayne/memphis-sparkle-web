@@ -6,7 +6,6 @@
 
 // 🔧 AI-Proof Constants (No Magic Numbers)
 export const IMAGE_CONFIG = {
-  UUID_LENGTH: 36,
   UPLOAD_PATH_PREFIX: '/lovable-uploads/',
   VALID_EXTENSIONS: ['.png', '.jpg', '.jpeg'],
   MAX_VALIDATION_TIMEOUT: 5000,
@@ -38,16 +37,16 @@ export const validateImagePathFormat = (path: string): ImageValidationResult => 
     };
   }
   
-  // Extract UUID part
-  const uuidPart = path.replace(IMAGE_CONFIG.UPLOAD_PATH_PREFIX, '').split('.')[0];
+  // Extract filename part (without path prefix and extension)
+  const filename = path.replace(IMAGE_CONFIG.UPLOAD_PATH_PREFIX, '').split('.')[0];
   
-  // Check UUID length
-  if (uuidPart.length !== IMAGE_CONFIG.UUID_LENGTH) {
-    console.error(`❌ INVALID UUID LENGTH: Expected ${IMAGE_CONFIG.UUID_LENGTH}, got ${uuidPart.length}`);
+  // Check that filename is not empty
+  if (!filename || filename.length === 0) {
+    console.error(`❌ EMPTY FILENAME: Path "${path}" has no filename`);
     return {
       isValid: false,
       path,
-      errorReason: `Invalid UUID length - expected ${IMAGE_CONFIG.UUID_LENGTH}, got ${uuidPart.length}`,
+      errorReason: 'Empty filename not allowed',
       validatedAt: timestamp,
     };
   }

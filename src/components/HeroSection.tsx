@@ -1,17 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Star, Award, Shield } from "lucide-react";
 import heroImage from "@/assets/hero-before-after.jpg";
-
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Before and after pressure washing transformation"
-          className="w-full h-full object-cover"
-        />
+        <img src={heroImage} alt="Before and after pressure washing transformation" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
       </div>
 
@@ -28,17 +22,10 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in">
-            <Button 
-              size="lg" 
-              className="bg-warning-orange hover:bg-warning-orange/90 text-white font-semibold px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-xl"
-            >
+            <Button size="lg" className="bg-warning-orange hover:bg-warning-orange/90 text-white font-semibold px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-xl">
               Get a FREE Quote
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-primary font-semibold px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300"
-            >
+            <Button size="lg" variant="outline" className="border-white hover:bg-white font-semibold px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 text-stone-950">
               <Phone className="mr-2 h-5 w-5" />
               Call Us: (901) 701-0005
             </Button>
@@ -48,9 +35,7 @@ const HeroSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center animate-fade-in">
             <div className="flex flex-col items-center">
               <div className="flex mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />)}
               </div>
               <p className="text-sm text-blue-100">5-Star Reviews</p>
             </div>
@@ -69,8 +54,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;

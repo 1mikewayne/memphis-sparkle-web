@@ -76,6 +76,15 @@ export const createValidatedImageRegistry = async () => {
 export const WORKING_IMAGES = {
   CONCRETE_TRANSFORMATION: VERIFIED_REAL_IMAGES.CONCRETE_DRIVEWAY_TRANSFORMATION,
   DRIVEWAY_BEFORE_AFTER: VERIFIED_REAL_IMAGES.DRIVEWAY_BEFORE_AFTER,
+  SIDEWALK_CLEANING_1: "/lovable-uploads/sidewalk1.jpg",
+  SIDEWALK_CLEANING_2: "/lovable-uploads/sidewalk2.jpg",
+  BACKYARD_TRANSFORMATION: "/lovable-uploads/backyard1.jpg",
+  WALKWAY_CLEANING: "/lovable-uploads/walkway1.jpg",
+  FLOOR_SURFACE_CLEANING: "/lovable-uploads/floorway1.jpg",
+  GATE_RESTORATION: "/lovable-uploads/gate1.jpg",
+  HOUSE_EXTERIOR_WASH_1: "/lovable-uploads/sidehouse1.jpg",
+  HOUSE_EXTERIOR_WASH_2: "/lovable-uploads/sidehouse2.jpg",
+  HOUSE_EXTERIOR_WASH_3: "/lovable-uploads/sidehouse3.jpg",
 } as const;
 
 console.log(`🎯 REAL IMAGE REGISTRY LOADED:`, {

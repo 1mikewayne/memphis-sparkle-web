@@ -24,7 +24,7 @@ export interface GalleryImageItem {
  * Includes all uploaded before/after transformations organized by category
  */
 export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
-  // Primary featured transformation - the uploaded before/after comparison
+  // Primary featured transformation - the new uploaded image
   {
     id: 1,
     image: PRESSURE_WASH_IMAGES.DRIVEWAYS.DRIVEWAY_BEFORE_AFTER,
@@ -34,77 +34,13 @@ export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
     projectType: PROJECT_METADATA.DRIVEWAY_CONCRETE.projectType,
   },
 
-  // House washing projects
+  // Second verified working image
   {
     id: 2,
-    image: PRESSURE_WASH_IMAGES.HOUSES.VINYL_SIDING_CLEANING,
-    title: PROJECT_METADATA.HOUSE_VINYL.title,
-    description: PROJECT_METADATA.HOUSE_VINYL.description,
-    category: PROJECT_METADATA.HOUSE_VINYL.category,
-    projectType: PROJECT_METADATA.HOUSE_VINYL.projectType,
-  },
-  {
-    id: 3,
-    image: PRESSURE_WASH_IMAGES.HOUSES.BRICK_HOUSE_RESTORATION,
-    title: PROJECT_METADATA.HOUSE_BRICK.title,
-    description: PROJECT_METADATA.HOUSE_BRICK.description,
-    category: PROJECT_METADATA.HOUSE_BRICK.category,
-    projectType: PROJECT_METADATA.HOUSE_BRICK.projectType,
-  },
-
-  // Fencing restoration projects
-  {
-    id: 4,
-    image: PRESSURE_WASH_IMAGES.FENCING.WOODEN_FENCE_RENEWAL,
-    title: PROJECT_METADATA.FENCE_WOODEN.title,
-    description: PROJECT_METADATA.FENCE_WOODEN.description,
-    category: PROJECT_METADATA.FENCE_WOODEN.category,
-    projectType: PROJECT_METADATA.FENCE_WOODEN.projectType,
-  },
-  {
-    id: 5,
-    image: PRESSURE_WASH_IMAGES.FENCING.VINYL_FENCE_CLEANING,
-    title: PROJECT_METADATA.FENCE_VINYL.title,
-    description: PROJECT_METADATA.FENCE_VINYL.description,
-    category: PROJECT_METADATA.FENCE_VINYL.category,
-    projectType: PROJECT_METADATA.FENCE_VINYL.projectType,
-  },
-
-  // Brick work and specialty cleaning
-  {
-    id: 6,
-    image: PRESSURE_WASH_IMAGES.BRICK_WORK.PATIO_RESTORATION,
-    title: PROJECT_METADATA.PATIO_BRICK.title,
-    description: PROJECT_METADATA.PATIO_BRICK.description,
-    category: PROJECT_METADATA.PATIO_BRICK.category,
-    projectType: PROJECT_METADATA.PATIO_BRICK.projectType,
-  },
-  {
-    id: 7,
-    image: PRESSURE_WASH_IMAGES.BRICK_WORK.BRICK_WALKWAY_CLEANING,
-    title: PROJECT_METADATA.WALKWAY_BRICK.title,
-    description: PROJECT_METADATA.WALKWAY_BRICK.description,
-    category: PROJECT_METADATA.WALKWAY_BRICK.category,
-    projectType: PROJECT_METADATA.WALKWAY_BRICK.projectType,
-  },
-
-  // Fallback examples using existing assets for split layout demo
-  {
-    id: 8,
-    before: serviceActionImage,
-    after: cleanHouseImage,
-    title: "Commercial Property Cleaning",
-    description: "Large-scale commercial building exterior cleaning and restoration",
-    category: "Commercial Properties",
-    projectType: "Commercial",
-  },
-  {
-    id: 9,
-    before: heroImage,
-    after: serviceActionImage,
-    title: "Multi-Surface Restoration",
-    description: "Comprehensive cleaning of mixed materials - concrete, brick, and siding",
-    category: "Specialty Cleaning",
+    image: PRESSURE_WASH_IMAGES.DRIVEWAYS.CONCRETE_TRANSFORMATION,
+    title: "Concrete Driveway Restoration",
+    description: "Professional concrete cleaning and restoration removing years of buildup",
+    category: "Driveway Transformations",
     projectType: "Residential",
   },
 ] as const;

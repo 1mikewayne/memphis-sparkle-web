@@ -35,14 +35,15 @@ const GalleryImageLoader = ({
     onLoadSuccess?.();
   }, [title, category, onLoadSuccess, imagePath]);
 
-  const handleImageError = useCallback((event: any) => {
+  const handleImageError = useCallback((event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const errorMsg = `Failed to load: ${imagePath}`;
+    const imgTarget = event.currentTarget as HTMLImageElement;
     console.error(`❌ IMAGE LOAD FAILED: ${title} (${category})`, {
       path: imagePath,
       fullURL: `${window.location.origin}${imagePath}`,
       errorEvent: event,
-      errorTarget: event?.target?.src,
-      networkError: event?.type,
+      errorTarget: imgTarget.src,
+      networkError: event.type,
       timestamp: new Date().toISOString()
     });
     

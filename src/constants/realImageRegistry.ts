@@ -6,11 +6,22 @@
 
 import { validateImagePathFormat, testImageLoad, type ImageValidationResult } from './imageValidation';
 
-// 🏗️ Only Verified Working Images (Cleaned Registry)
+// 🏗️ All Verified Working Images (Expanded Registry)
 const VERIFIED_REAL_IMAGES = {
-  // Only real uploaded images that we know work
+  // Original verified images
   CONCRETE_DRIVEWAY_TRANSFORMATION: "/lovable-uploads/6d0a98e8-4548-43ed-b9ac-28c13e170f94.png",
   DRIVEWAY_BEFORE_AFTER: "/lovable-uploads/c7ac95af-9b19-43c0-b48e-009256695dcb.png",
+  
+  // New uploaded real customer transformations
+  BACKYARD_TRANSFORMATION: "/lovable-uploads/backyard1.jpg",
+  WALKWAY_CLEANING: "/lovable-uploads/walkway1.jpg",
+  GATE_RESTORATION: "/lovable-uploads/gate1.jpg",
+  SIDEWALK_CLEANING_1: "/lovable-uploads/sidewalk1.jpg",
+  SIDEWALK_CLEANING_2: "/lovable-uploads/sidewalk2.jpg",
+  HOUSE_EXTERIOR_WASH_1: "/lovable-uploads/sidehouse1.jpg",
+  HOUSE_EXTERIOR_WASH_2: "/lovable-uploads/sidehouse2.jpg",
+  HOUSE_EXTERIOR_WASH_3: "/lovable-uploads/sidehouse3.jpg",
+  FLOOR_SURFACE_CLEANING: "/lovable-uploads/floorway1.jpg",
 } as const;
 
 /**
@@ -69,10 +80,22 @@ export const createValidatedImageRegistry = async () => {
   };
 };
 
-// 🎯 Export only the verified images we know work
+// 🎯 Export all verified working images organized by category
 export const WORKING_IMAGES = {
+  // Original images
   CONCRETE_TRANSFORMATION: VERIFIED_REAL_IMAGES.CONCRETE_DRIVEWAY_TRANSFORMATION,
   DRIVEWAY_BEFORE_AFTER: VERIFIED_REAL_IMAGES.DRIVEWAY_BEFORE_AFTER,
+  
+  // New customer transformations
+  BACKYARD_TRANSFORMATION: VERIFIED_REAL_IMAGES.BACKYARD_TRANSFORMATION,
+  WALKWAY_CLEANING: VERIFIED_REAL_IMAGES.WALKWAY_CLEANING,
+  GATE_RESTORATION: VERIFIED_REAL_IMAGES.GATE_RESTORATION,
+  SIDEWALK_CLEANING_1: VERIFIED_REAL_IMAGES.SIDEWALK_CLEANING_1,
+  SIDEWALK_CLEANING_2: VERIFIED_REAL_IMAGES.SIDEWALK_CLEANING_2,
+  HOUSE_EXTERIOR_WASH_1: VERIFIED_REAL_IMAGES.HOUSE_EXTERIOR_WASH_1,
+  HOUSE_EXTERIOR_WASH_2: VERIFIED_REAL_IMAGES.HOUSE_EXTERIOR_WASH_2,
+  HOUSE_EXTERIOR_WASH_3: VERIFIED_REAL_IMAGES.HOUSE_EXTERIOR_WASH_3,
+  FLOOR_SURFACE_CLEANING: VERIFIED_REAL_IMAGES.FLOOR_SURFACE_CLEANING,
 } as const;
 
 console.log(`🎯 REAL IMAGE REGISTRY LOADED:`, {

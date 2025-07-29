@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Phone, Star, Award, Shield } from "lucide-react";
-import heroImage from "@/assets/hero-before-after.jpg";
 const HeroSection = () => {
   return <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <img src={heroImage} alt="Before and after pressure washing transformation" className="w-full h-full object-cover" />
+        <img src="/lovable-uploads/backyard1.jpg" alt="Real customer backyard transformation - pressure washing results" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70"></div>
       </div>
 

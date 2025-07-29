@@ -20,13 +20,23 @@ export interface GalleryImageItem {
 }
 
 /**
- * 🎨 Enhanced Gallery Images Configuration - All Real Projects
- * Includes all uploaded before/after transformations organized by category
+ * 🎨 Complete Gallery Images Configuration - All Real Customer Projects
+ * Showcasing diverse pressure washing transformations across all categories
  */
 export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
-  // Primary featured transformation - the new uploaded image
+  // Featured backyard transformation (main hero image)
   {
     id: 1,
+    image: PRESSURE_WASH_IMAGES.BACKYARDS.BACKYARD_TRANSFORMATION,
+    title: PROJECT_METADATA.BACKYARD_TRANSFORMATION.title,
+    description: PROJECT_METADATA.BACKYARD_TRANSFORMATION.description,
+    category: PROJECT_METADATA.BACKYARD_TRANSFORMATION.category,
+    projectType: PROJECT_METADATA.BACKYARD_TRANSFORMATION.projectType,
+  },
+
+  // Driveway transformations
+  {
+    id: 2,
     image: PRESSURE_WASH_IMAGES.DRIVEWAYS.DRIVEWAY_BEFORE_AFTER,
     title: PROJECT_METADATA.DRIVEWAY_CONCRETE.title,
     description: PROJECT_METADATA.DRIVEWAY_CONCRETE.description,
@@ -34,14 +44,89 @@ export const GALLERY_IMAGES: readonly GalleryImageItem[] = [
     projectType: PROJECT_METADATA.DRIVEWAY_CONCRETE.projectType,
   },
 
-  // Second verified working image
   {
-    id: 2,
+    id: 3,
     image: PRESSURE_WASH_IMAGES.DRIVEWAYS.CONCRETE_TRANSFORMATION,
     title: "Concrete Driveway Restoration",
     description: "Professional concrete cleaning and restoration removing years of buildup",
     category: "Driveway Transformations",
     projectType: "Residential",
+  },
+
+  // House exterior washing
+  {
+    id: 4,
+    image: PRESSURE_WASH_IMAGES.HOUSE_EXTERIOR.HOUSE_WASH_1,
+    title: PROJECT_METADATA.HOUSE_EXTERIOR_WASH.title,
+    description: PROJECT_METADATA.HOUSE_EXTERIOR_WASH.description,
+    category: PROJECT_METADATA.HOUSE_EXTERIOR_WASH.category,
+    projectType: PROJECT_METADATA.HOUSE_EXTERIOR_WASH.projectType,
+  },
+
+  {
+    id: 5,
+    image: PRESSURE_WASH_IMAGES.HOUSE_EXTERIOR.HOUSE_WASH_2,
+    title: "House Siding Deep Clean",
+    description: "Complete house exterior cleaning removing years of dirt and mildew",
+    category: "House Exterior Washing",
+    projectType: "Residential",
+  },
+
+  {
+    id: 6,
+    image: PRESSURE_WASH_IMAGES.HOUSE_EXTERIOR.HOUSE_WASH_3,
+    title: "Exterior House Restoration",
+    description: "Professional house washing service restoring original appearance",
+    category: "House Exterior Washing",
+    projectType: "Residential",
+  },
+
+  // Walkways and floors
+  {
+    id: 7,
+    image: PRESSURE_WASH_IMAGES.WALKWAYS.WALKWAY_CLEANING,
+    title: PROJECT_METADATA.WALKWAY_CLEANING.title,
+    description: PROJECT_METADATA.WALKWAY_CLEANING.description,
+    category: PROJECT_METADATA.WALKWAY_CLEANING.category,
+    projectType: PROJECT_METADATA.WALKWAY_CLEANING.projectType,
+  },
+
+  {
+    id: 8,
+    image: PRESSURE_WASH_IMAGES.WALKWAYS.FLOOR_SURFACE_CLEANING,
+    title: PROJECT_METADATA.FLOOR_SURFACE_CLEANING.title,
+    description: PROJECT_METADATA.FLOOR_SURFACE_CLEANING.description,
+    category: PROJECT_METADATA.FLOOR_SURFACE_CLEANING.category,
+    projectType: PROJECT_METADATA.FLOOR_SURFACE_CLEANING.projectType,
+  },
+
+  // Sidewalk cleaning
+  {
+    id: 9,
+    image: PRESSURE_WASH_IMAGES.SIDEWALKS.SIDEWALK_CLEANING_1,
+    title: PROJECT_METADATA.SIDEWALK_CLEANING.title,
+    description: PROJECT_METADATA.SIDEWALK_CLEANING.description,
+    category: PROJECT_METADATA.SIDEWALK_CLEANING.category,
+    projectType: PROJECT_METADATA.SIDEWALK_CLEANING.projectType,
+  },
+
+  {
+    id: 10,
+    image: PRESSURE_WASH_IMAGES.SIDEWALKS.SIDEWALK_CLEANING_2,
+    title: "Sidewalk Surface Restoration",
+    description: "Professional sidewalk cleaning revealing original concrete condition",
+    category: "Sidewalk Cleaning",
+    projectType: "Residential",
+  },
+
+  // Gate restoration
+  {
+    id: 11,
+    image: PRESSURE_WASH_IMAGES.GATES.GATE_RESTORATION,
+    title: PROJECT_METADATA.GATE_RESTORATION.title,
+    description: PROJECT_METADATA.GATE_RESTORATION.description,
+    category: PROJECT_METADATA.GATE_RESTORATION.category,
+    projectType: PROJECT_METADATA.GATE_RESTORATION.projectType,
   },
 ] as const;
 

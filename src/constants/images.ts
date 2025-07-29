@@ -5,65 +5,43 @@
 
 import { WORKING_IMAGES } from './realImageRegistry';
 
-// 🎯 Real Image Paths (No Fake Placeholders Allowed)
+// 🎯 Real Image Paths (All Customer Transformations)
 const UPLOADED_IMAGE_PATHS = {
   DRIVEWAYS: {
     CONCRETE_TRANSFORMATION: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
-    // Real before/after driveway transformation
     DRIVEWAY_BEFORE_AFTER: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
   },
-  HOUSES: {
-    // Using verified working images only
-    VINYL_SIDING_CLEANING: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
-    EXTERIOR_HOUSE_WASH: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
-    BRICK_HOUSE_RESTORATION: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
+  BACKYARDS: {
+    BACKYARD_TRANSFORMATION: WORKING_IMAGES.BACKYARD_TRANSFORMATION,
   },
-  FENCING: {
-    // Using verified working images only  
-    WOODEN_FENCE_RENEWAL: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
-    VINYL_FENCE_CLEANING: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
+  WALKWAYS: {
+    WALKWAY_CLEANING: WORKING_IMAGES.WALKWAY_CLEANING,
+    FLOOR_SURFACE_CLEANING: WORKING_IMAGES.FLOOR_SURFACE_CLEANING,
   },
-  BRICK_WORK: {
-    // Using verified working images only
-    PATIO_RESTORATION: WORKING_IMAGES.DRIVEWAY_BEFORE_AFTER,
-    BRICK_WALKWAY_CLEANING: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
+  GATES: {
+    GATE_RESTORATION: WORKING_IMAGES.GATE_RESTORATION,
+  },
+  SIDEWALKS: {
+    SIDEWALK_CLEANING_1: WORKING_IMAGES.SIDEWALK_CLEANING_1,
+    SIDEWALK_CLEANING_2: WORKING_IMAGES.SIDEWALK_CLEANING_2,
+  },
+  HOUSE_EXTERIOR: {
+    HOUSE_WASH_1: WORKING_IMAGES.HOUSE_EXTERIOR_WASH_1,
+    HOUSE_WASH_2: WORKING_IMAGES.HOUSE_EXTERIOR_WASH_2,
+    HOUSE_WASH_3: WORKING_IMAGES.HOUSE_EXTERIOR_WASH_3,
   },
 } as const;
-
-// 🔍 Debug: Log real image paths for verification
-console.log("🖼️ REAL IMAGE REGISTRY DEBUG:", {
-  workingImagePath: WORKING_IMAGES.CONCRETE_TRANSFORMATION,
-  totalCategories: Object.keys(UPLOADED_IMAGE_PATHS).length,
-  totalImageSlots: Object.values(UPLOADED_IMAGE_PATHS).reduce(
-    (total, category) => total + Object.keys(category).length, 
-    0
-  ),
-});
-
-// 🧪 Validate all paths on load
-Object.entries(UPLOADED_IMAGE_PATHS).forEach(([category, images]) => {
-  Object.entries(images).forEach(([imageName, path]) => {
-    console.log(`🔍 CHECKING ${category}.${imageName}:`, path);
-    
-    // Test image accessibility
-    const testImg = new Image();
-    testImg.onload = () => console.log(`✅ ${category}.${imageName} LOADS SUCCESSFULLY:`, path);
-    testImg.onerror = () => console.error(`❌ ${category}.${imageName} LOAD FAILED:`, path);
-    testImg.src = path;
-  });
-});
 
 /**
  * 🏗️ Image Categories Configuration
  */
 export const IMAGE_CATEGORIES = {
-  RESIDENTIAL: "Residential Projects",
-  COMMERCIAL: "Commercial Properties", 
-  SPECIALTY: "Specialty Cleaning",
   DRIVEWAYS: "Driveway Transformations",
-  HOUSES: "House Washing",
-  FENCING: "Fence Restoration",
-  BRICK_WORK: "Brick & Stone Work",
+  BACKYARDS: "Backyard Cleaning",
+  WALKWAYS: "Walkway & Floor Cleaning",
+  GATES: "Gate & Fence Restoration",
+  SIDEWALKS: "Sidewalk Cleaning",
+  HOUSE_EXTERIOR: "House Exterior Washing",
 } as const;
 
 /**
@@ -71,57 +49,59 @@ export const IMAGE_CATEGORIES = {
  */
 export const PROJECT_METADATA = {
   DRIVEWAY_CONCRETE: {
-    title: "Concrete Driveway Transformation",
-    description: "Complete concrete driveway restoration removing years of oil stains, dirt, and grime",
+    title: "Concrete Driveway Revival",
+    description: "Complete driveway transformation removing years of oil stains and grime",
     category: IMAGE_CATEGORIES.DRIVEWAYS,
     projectType: "Residential",
   },
-  HOUSE_VINYL: {
-    title: "Vinyl Siding House Wash",
-    description: "Professional house washing service restoring vinyl siding to like-new condition",
-    category: IMAGE_CATEGORIES.HOUSES,
+  BACKYARD_TRANSFORMATION: {
+    title: "Backyard Patio Restoration",
+    description: "Professional backyard cleaning revealing beautiful surfaces underneath",
+    category: IMAGE_CATEGORIES.BACKYARDS,
     projectType: "Residential",
   },
-  HOUSE_BRICK: {
-    title: "Brick House Exterior Cleaning",
-    description: "Specialized brick cleaning removing moss, mildew, and weathering stains",
-    category: IMAGE_CATEGORIES.HOUSES,
+  WALKWAY_CLEANING: {
+    title: "Walkway Deep Clean",
+    description: "Restored walkway surface with professional pressure washing techniques",
+    category: IMAGE_CATEGORIES.WALKWAYS,
     projectType: "Residential",
   },
-  FENCE_WOODEN: {
-    title: "Wooden Fence Restoration",
-    description: "Complete wooden fence cleaning and restoration service",
-    category: IMAGE_CATEGORIES.FENCING,
+  GATE_RESTORATION: {
+    title: "Gate & Fence Restoration",
+    description: "Complete gate cleaning removing built-up dirt and weathering",
+    category: IMAGE_CATEGORIES.GATES,
     projectType: "Residential",
   },
-  FENCE_VINYL: {
-    title: "Vinyl Fence Deep Cleaning",
-    description: "Professional vinyl fence cleaning removing algae and environmental stains",
-    category: IMAGE_CATEGORIES.FENCING,
+  SIDEWALK_CLEANING: {
+    title: "Sidewalk Surface Renewal",
+    description: "Professional sidewalk cleaning restoring original appearance",
+    category: IMAGE_CATEGORIES.SIDEWALKS,
     projectType: "Residential",
   },
-  PATIO_BRICK: {
-    title: "Brick Patio Restoration",
-    description: "Professional brick patio cleaning and sealing service",
-    category: IMAGE_CATEGORIES.BRICK_WORK,
+  HOUSE_EXTERIOR_WASH: {
+    title: "House Exterior Deep Clean",
+    description: "Complete exterior house washing removing dirt, mildew, and stains",
+    category: IMAGE_CATEGORIES.HOUSE_EXTERIOR,
     projectType: "Residential",
   },
-  WALKWAY_BRICK: {
-    title: "Brick Walkway Cleaning",
-    description: "Complete brick walkway restoration removing moss and weathering",
-    category: IMAGE_CATEGORIES.BRICK_WORK,
+  FLOOR_SURFACE_CLEANING: {
+    title: "Floor Surface Restoration",
+    description: "Professional floor cleaning revealing original surface condition",
+    category: IMAGE_CATEGORIES.WALKWAYS,
     projectType: "Residential",
   },
 } as const;
 
 /**
- * 🎯 Exported Image Registry - Only Real Paths
+ * 🎯 Exported Image Registry - All Real Customer Transformations
  */
 export const PRESSURE_WASH_IMAGES = {
   DRIVEWAYS: UPLOADED_IMAGE_PATHS.DRIVEWAYS,
-  HOUSES: UPLOADED_IMAGE_PATHS.HOUSES,
-  FENCING: UPLOADED_IMAGE_PATHS.FENCING,
-  BRICK_WORK: UPLOADED_IMAGE_PATHS.BRICK_WORK,
+  BACKYARDS: UPLOADED_IMAGE_PATHS.BACKYARDS,
+  WALKWAYS: UPLOADED_IMAGE_PATHS.WALKWAYS,
+  GATES: UPLOADED_IMAGE_PATHS.GATES,
+  SIDEWALKS: UPLOADED_IMAGE_PATHS.SIDEWALKS,
+  HOUSE_EXTERIOR: UPLOADED_IMAGE_PATHS.HOUSE_EXTERIOR,
 } as const;
 
 /**
@@ -133,9 +113,10 @@ export const IMAGE_REGISTRY_STATS = {
     (total, category) => total + Object.keys(category).length, 
     0
   ),
-  UNIQUE_PATHS: new Set(
-    Object.values(PRESSURE_WASH_IMAGES).flatMap(category => Object.values(category))
-  ).size,
 } as const;
 
-console.log("🎯 FINAL IMAGE REGISTRY STATS:", IMAGE_REGISTRY_STATS);
+console.log("🎯 EXPANDED IMAGE REGISTRY:", {
+  totalCategories: IMAGE_REGISTRY_STATS.TOTAL_CATEGORIES,
+  totalImages: IMAGE_REGISTRY_STATS.TOTAL_IMAGES,
+  categories: Object.keys(PRESSURE_WASH_IMAGES),
+});

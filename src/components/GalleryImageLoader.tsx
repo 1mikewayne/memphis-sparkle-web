@@ -30,18 +30,24 @@ const GalleryImageLoader = ({
   const [errorDetails, setErrorDetails] = useState<string>('');
 
   const handleImageLoad = useCallback(() => {
-    console.log(`✅ IMAGE LOAD SUCCESS: ${title} (${category})`);
+    console.log(`✅ IMAGE LOAD SUCCESS: ${title} (${category}) -> ${imagePath}`);
     setLoadState('success');
     onLoadSuccess?.();
-  }, [title, category, onLoadSuccess]);
+  }, [title, category, onLoadSuccess, imagePath]);
 
   const handleImageError = useCallback((event: any) => {
     const errorMsg = `Failed to load: ${imagePath}`;
     console.error(`❌ IMAGE LOAD FAILED: ${title} (${category})`, {
       path: imagePath,
+      fullURL: `${window.location.origin}${imagePath}`,
       errorEvent: event,
-      errorTarget: event?.target?.src
+      errorTarget: event?.target?.src,
+      networkError: event?.type,
+      timestamp: new Date().toISOString()
     });
+    
+    // Test direct image access
+    console.log(`🔍 TESTING DIRECT ACCESS: ${window.location.origin}${imagePath}`);
     
     setLoadState('error');
     setErrorDetails(errorMsg);
